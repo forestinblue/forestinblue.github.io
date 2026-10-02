@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta name="author" content="Jun Seok Kim">
+    <meta name="description" content="Jun Seok Kim's Homepage">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Jun Seok Kim</title>
+    <style>
+      strong {
+          font-weight: bold;
+          color: black;
+      }
+    </style>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500&family=Alegreya+SC&family=Lora:wght@400&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+        <div class="row">
+          <div class="col-xl-1"></div>
+          <div class="col col-xl-10">
+            <div class="row mb-3">
+  <div class="col d-none d-md-block">
+    <div class="d-flex justify-content-end flex-wrap">
+    <a href="#research" class="btn link-button" role="button">Research</a>
+    </div>
+  </div>
+  <div class="col d-md-none">
+    <div class="d-flex justify-content-end flex-wrap">
+    <a href="#research" class="btn link-button-small" role="button">Research</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="row pt-1 m-1">
+
+<div class="container" text-align="center">
+
+  <div class="row info-text">
+    <div class="col-sm-4">
+      <div class="text-center">
+
+        <div class="d-block d-sm-none">
+        <img src="headshot.jpeg?v=2" class="img-fluid rounded-circle center-block about-headshot-mobile" alt="headshot">
+        </div>
+        <div class="d-none d-sm-block">
+        <img src="headshot.jpeg?v=2" class="img-fluid rounded-circle center-block about-headshot" alt="headshot">
+        </div>
+        <p class="h3 pt-sm-3 title-name">Jun Seok Kim</p>
+
+        <a href="mailto:ijunsuk9797@gmail.com"><i class="fa fa-envelope" style="font-size: 1.6em;"></i></a>
+        <a href="https://github.com/forestinblue"><i class="fab fa-github" style="font-size: 1.6em;"></i></a>
+        <a href="media/CV.pdf" target="_blank"><i class="fa fa-file-pdf" style="font-size: 1.6em;"></i></a>
+
+      </div>
+    </div>
+    <div class="col-sm-8 about-text">
+     <p>I am an MSc student in Artificial Intelligence and Robotics at <a href="https://www.cuhk.edu.cn/en">The Chinese University of Hong Kong, Shenzhen</a>, advised by <a href="https://myweb.cuhk.edu.cn/ruihuang">Prof. Rui Huang</a>. Before that, I received bachelor's degrees in Information Statistics and Data Science from Kangwon National University and worked as a data scientist at Connple.</p>
+     <p>My research interests are robust perception for robotics and uncertainty-aware 3D perception. I want robots to know when their own perception should not be trusted.</p>
+     <p>I also founded <a href="https://tarsanalytics.com/en/" target="_blank" rel="noopener">TARS</a>, a foot-traffic analytics service built on computer vision and used by over 60 small businesses.</p>
+     <p>I am applying to PhD programs for Fall 2027.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<br>
+
+
+<a name="research"></a>
+<div class="row content-header">
+  <div class="col pr-0">
+  <p>Research</p>
+  </div>
+</div>
+
+
+<div class="row content-summary pt-4 pb-2">
+
+  <div class="d-none d-sm-block col-sm-3  m-0 p-0">
+
+    <img src=/media/projects/thesis.png class="img-fluid summary-image drop-shadow" alt="teaser img">
+
+  </div>
+
+  <div class="col-xs col-sm-9">
+    <p class="summary-title">Range-Aware Uncertainty Calibration in Self-Supervised Monocular Depth</p>
+    <p class="summary-publication-status">MSc thesis, 2026. Paper in preparation with Prof. Rui Huang.</p>
+    <p class="summary-text">Self-supervised depth models never see ground-truth depth, so their predicted uncertainty is never tied to actual error. I calibrate it without any ground-truth depth by training only the uncertainty head on residuals against classical stereo matching. This cuts near-range calibration mismatch by 83% compared with the original model.</p>
+
+  </div>
+
+</div>
+
+
+<div class="row content-summary pt-4 pb-2">
+
+  <div class="d-none d-sm-block col-sm-3  m-0 p-0">
+
+    <img src=/media/projects/localaggtr.png class="img-fluid summary-image drop-shadow" alt="teaser img">
+
+  </div>
+
+  <div class="col-xs col-sm-9">
+    <p class="summary-title">LocalAggTR: Differentiable Voxelization for Weakly Supervised 3D Occupancy</p>
+    <p class="summary-publication-status">Capstone project, 2025.</p>
+    <p class="summary-text">The Gaussian-to-voxel step in GaussTR is non-differentiable and dominates inference time. I replaced it with a differentiable Local Aggregation operator that passes occupancy gradients, giving 7.2 times faster inference with mIoU unchanged on nuScenes.</p>
+    <a href="https://github.com/forestinblue/LocalAggTR" class="btn-sm badge-button" role="button">code</a>
+
+  </div>
+
+</div>
+
+
+<div class="row content-summary pt-4 pb-2">
+
+  <div class="d-none d-sm-block col-sm-3  m-0 p-0">
+
+    <img src=/media/projects/density.png class="img-fluid summary-image drop-shadow" alt="teaser img">
+
+  </div>
+
+  <div class="col-xs col-sm-9">
+    <p class="summary-title">Point Cloud Density and 3D Object Detection</p>
+    <p class="summary-publication-status">2025.</p>
+    <p class="summary-text">How does a 3D detector degrade when LiDAR density drops, and can upsampling recover it? With PointPillars on nuScenes-mini, voxel-grid downsampling kept one fifth of the points with only a 2.1% relative mAP drop, while upsampling recovered less than half of the loss from random sampling.</p>
+    <a href="https://github.com/forestinblue/3D-PointCloud-DownUpSampling" class="btn-sm badge-button" role="button">code</a>
+
+  </div>
+
+</div>
+
+
+<div class="row content-summary pt-4 pb-2">
+
+  <div class="d-none d-sm-block col-sm-3  m-0 p-0">
+
+    <img src=/media/projects/augmentation.png class="img-fluid summary-image drop-shadow" alt="teaser img">
+
+  </div>
+
+  <div class="col-xs col-sm-9">
+    <p class="summary-title">Geometric vs. Generative 3D Augmentation for Point Cloud Classification</p>
+    <p class="summary-publication-status">2025.</p>
+    <p class="summary-text">Does text-to-3D generative augmentation help a point cloud classifier more than geometric augmentation? With PointNet on ModelNet40, geometric augmentation raised accuracy by 6.5%, while Point-E generated shapes lowered it.</p>
+    <a href="https://github.com/forestinblue/3D-Augmentation-PointNet" class="btn-sm badge-button" role="button">code</a>
+
+  </div>
+
+</div>
+
+
+            </div>
+          </div>
+          <div class="col-xl-1"></div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+
+  <footer>
+
+
+<div class="row">
+<div class="col-12">
+<br>
+<br>
+<br>
+<br>
+</div>
+</div>
+
+<p class="footer-text">Website adapted from <a href="https://nmwsharp.com">Nicholas Sharp</a></p>
+
+</footer>
