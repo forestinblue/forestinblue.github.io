@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta name="author" content="Jun Seok Kim">
+    <meta name="description" content="Range-aware uncertainty calibration in self-supervised monocular depth">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Range-aware uncertainty calibration in self-supervised monocular depth</title>
+    <style>
+      strong {
+          font-weight: bold;
+          color: black;
+      }
+    </style>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500&family=Alegreya+SC&family=Lora:wght@400&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+        <div class="row">
+          <div class="col-xl-1"></div>
+          <div class="col col-xl-10">
+            <div class="row mb-3">
+  <div class="col d-none d-md-block">
+    <div class="d-flex justify-content-start flex-wrap">
+    <a href="../../index.html" class="btn link-button" role="button">&larr; Home</a>
+    </div>
+  </div>
+  <div class="col d-md-none">
+    <div class="d-flex justify-content-start flex-wrap">
+    <a href="../../index.html" class="btn link-button-small" role="button">&larr; Home</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <p class="full-title">Range-aware uncertainty calibration in self-supervised monocular depth</p>
+    <p class="authors-list">Jun Seok Kim, Rui Huang</p>
+    <p class="schools-list">The Chinese University of Hong Kong, Shenzhen</p>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col">
+    <p class="summary-text"><strong>Without ground-truth depth in training or calibration, we cut the worst-range calibration error of a self-supervised monocular depth model's uncertainty by 89%.</strong></p>
+    <br>
+    <p class="summary-text"><strong>Problem.</strong> Robots act on the uncertainty of self-supervised depth models, yet it is evaluated only by ranking, so its magnitude goes unchecked. On KITTI, MonoProb underestimates its error in all five depth ranges, with typical error up to 3.7× larger than its uncertainty implies. Retraining on self-supervised signals alone never beat a single ground-truth-fitted global scale in any of 42 runs.</p>
+    <br>
+    <p class="summary-text">Figure 1 makes this visible. Each point groups pixels with similar predicted uncertainty <i>σ</i> and plots their typical actual error. Points on the line are calibrated: their typical error is what <i>σ</i> predicts. MonoProb's grey points all lie above it: its uncertainty is too small, most of all where it is most confident. Ours, in blue, moves onto the line for most groups; its two most confident groups stay above it and its least confident sit slightly below. Under a mean-square criterion, which weights rare large errors more, the gap narrows from 3.6× to 1.5× but does not close.</p>
+  </div>
+</div>
+
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <img src="fig1_option_B_gap.png" class="img-fluid w-100" alt="Figure 1">
+    <p class="selected-figure-caption mt-2"><strong>Figure 1.</strong> Released MonoProb base model (ResNet-18, 640×192) and ours, mean of 4 runs, on our KITTI validation split.</p>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col">
+    <p class="summary-publication-status">Manuscript in preparation. Preliminary results on our validation split; held-out evaluation pending. Preprint expected November 2026. A one-page summary is available on request: <a href="mailto:ijunsuk9797@gmail.com">ijunsuk9797@gmail.com</a></p>
+  </div>
+</div>
+
+
+            </div>
+          </div>
+          <div class="col-xl-1"></div>
+        </div>
+    </div>
+
+  </body>
+
+  <footer>
+
+
+<div class="row">
+<div class="col-12">
+<br>
+<br>
+<br>
+<br>
+</div>
+</div>
+
+<p class="footer-text">Website adapted from <a href="https://nmwsharp.com">Nicholas Sharp</a></p>
+
+</footer>
