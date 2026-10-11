@@ -61,11 +61,11 @@
 
 <div class="row">
   <div class="col">
-    <p class="summary-text"><strong>Without ground-truth depth in training or calibration, we cut the worst-range calibration error of a self-supervised monocular depth model's uncertainty by 89%.</strong></p>
+    <p class="summary-text"><strong>Without ground-truth depth in training or calibration, we cut the worst-range calibration error of a self-supervised monocular depth model's uncertainty by 86%.</strong></p>
     <br>
-    <p class="summary-text"><strong>Problem.</strong> Robots act on the uncertainty of self-supervised depth models, yet it is evaluated only by ranking, so its magnitude goes unchecked. On KITTI, MonoProb underestimates its error in all five depth ranges, with typical error up to 3.7× larger than its uncertainty implies. Retraining on self-supervised signals alone never beat a single ground-truth-fitted global scale in any of 42 runs.</p>
+    <p class="summary-text"><strong>Problem.</strong> Many robotic systems act on the magnitude of learned depth uncertainty, yet the uncertainty of self-supervised depth models is almost always evaluated by ranking, so that magnitude goes unchecked. On KITTI, MonoProb underestimates its error in all five depth ranges, with typical error up to 3.7× larger than its uncertainty implies. Retraining on self-supervised signals alone never beat a single ground-truth-fitted global scale in any of 42 runs.</p>
     <br>
-    <p class="summary-text">Figure 1 makes this visible. Each point groups pixels with similar predicted uncertainty <i>σ</i> and plots their typical actual error. Points on the line are calibrated: their typical error is what <i>σ</i> predicts. MonoProb's grey points all lie above it: its uncertainty is too small, most of all where it is most confident. Ours, in blue, moves onto the line for most groups; its two most confident groups stay above it and its least confident sit slightly below. Under a mean-square criterion, which weights rare large errors more, the gap narrows from 3.6× to 1.5× but does not close.</p>
+    <p class="summary-text">Figure 1 makes this visible. Each point groups pixels with similar predicted uncertainty <i>σ</i> and plots their typical actual error. Points on the line are calibrated: their typical error is what <i>σ</i> predicts. MonoProb's grey points all lie above it: its uncertainty is too small, most of all where it is most confident. Ours, in blue, moves onto the line for most groups; its two most confident groups stay above it and its least confident sit slightly below. Under a mean-square criterion, which weights rare large errors more, the gap narrows from 3.6× to 1.2× but does not close.</p>
   </div>
 </div>
 
