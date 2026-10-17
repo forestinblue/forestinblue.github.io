@@ -72,14 +72,6 @@
     <br>
     <p class="summary-text"><strong>Problem.</strong> Robots act on the size of a depth uncertainty <i>σ</i>, not only on its ranking. Self-supervised depth models are built for places without labels, yet their <i>σ</i> is checked almost only by ranking, which cannot see its size. On KITTI, MonoProb's <i>σ</i> is too small in every depth range; in the nearest range the typical error is 3.7× what <i>σ</i> implies. Retraining on self-supervised signals alone never fixed this.</p>
     <br>
-    <p class="summary-text"><strong>Finding.</strong> The right correction differs by network and by dataset, so it has to be measured where the model is used, and that is exactly where no labels exist. A constant read from stereo-matching residuals does this job: on four networks and three driving datasets it lands at the level a LiDAR-fitted constant would give, without reading any ground-truth depth. Carried to a dataset with no stereo, it does not transfer.</p>
-    <br>
-    <p class="summary-text"><strong>Method.</strong> The released MonoProb network is frozen as teacher and a student is retrained from it by self-distillation. The student's <i>σ</i> is trained toward where its depth disagrees with a second self-supervised network, MonoViT, which serves only as the target for <i>σ</i>. After training, <i>σ</i> is multiplied by one number <i>s</i>, measured once from stereo pairs. At inference a single image goes in.</p>
-    <figure class="wide">
-      <img src="fig3_idea.png" alt="Figure 2">
-      <figcaption class="selected-figure-caption"><strong>Figure 2.</strong> The idea. (1) MonoProb's actual error exceeds its predicted uncertainty. (2) Where a second self-supervised network disagrees is a label-free estimate of where the error is large. (3) <i>σ</i> is trained to match that disagreement, then scaled by one constant <i>s</i> measured from stereo pairs without ground truth. Bars: median ratio over five depth ranges, 1 = calibrated. Images from KITTI (Geiger et al.).</figcaption>
-    </figure>
-    <br>
     <p class="summary-text">Figure 1 makes this visible. Each point groups pixels with similar predicted uncertainty <i>σ</i> and plots their typical actual error. Points on the line are calibrated: their typical error is what <i>σ</i> predicts. MonoProb's grey points all lie above it: its uncertainty is too small, most of all where it is most confident. Ours, in blue, moves onto the line for most groups; its two most confident groups stay above it and its least confident sit slightly below. Under a mean-square criterion, which weights rare large errors more, the gap narrows from 3.6× to 1.2× but does not close.</p>
   </div>
 </div>
@@ -90,6 +82,20 @@
   <div class="col-12 col-md-8 col-lg-6">
     <img src="fig1_option_B_gap.png" class="img-fluid w-100" alt="Figure 1">
     <p class="selected-figure-caption mt-2"><strong>Figure 1.</strong> Released MonoProb base model (ResNet-18, 640×192) and ours, mean of 4 runs, on our KITTI validation split.</p>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col">
+    <p class="summary-text"><strong>Finding.</strong> The right correction differs by network and by dataset, so it has to be measured where the model is used, and that is exactly where no labels exist. A constant read from stereo-matching residuals does this job: on four networks and three driving datasets it lands at the level a LiDAR-fitted constant would give, without reading any ground-truth depth. Carried to a dataset with no stereo, it does not transfer.</p>
+    <br>
+    <p class="summary-text"><strong>Method.</strong> The released MonoProb network is frozen as teacher and a student is retrained from it by self-distillation. The student's <i>σ</i> is trained toward where its depth disagrees with a second self-supervised network, MonoViT, which serves only as the target for <i>σ</i>. After training, <i>σ</i> is multiplied by one number <i>s</i>, measured once from stereo pairs. At inference a single image goes in.</p>
+    <figure class="wide">
+      <img src="fig3_idea.png" alt="Figure 2">
+      <figcaption class="selected-figure-caption"><strong>Figure 2.</strong> The idea. (1) MonoProb's actual error exceeds its predicted uncertainty. (2) Where a second self-supervised network disagrees is a label-free estimate of where the error is large. (3) <i>σ</i> is trained to match that disagreement, then scaled by one constant <i>s</i> measured from stereo pairs without ground truth. Bars: median ratio over five depth ranges, 1 = calibrated. Images from KITTI (Geiger et al.).</figcaption>
+    </figure>
   </div>
 </div>
 
