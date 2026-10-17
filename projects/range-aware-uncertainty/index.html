@@ -74,6 +74,8 @@
     <br>
     <p class="summary-text"><strong>Finding.</strong> The right correction differs by network and by dataset, so it has to be measured where the model is used, and that is exactly where no labels exist. A constant read from stereo-matching residuals does this job: on four networks and three driving datasets it lands at the level a LiDAR-fitted constant would give, without reading any ground-truth depth. Carried to a dataset with no stereo, it does not transfer.</p>
     <br>
+    <p class="summary-text"><strong>Method.</strong> The released MonoProb network is frozen as teacher and a student is retrained from it by self-distillation. The student's <i>σ</i> is trained toward where its depth disagrees with a second self-supervised network, MonoViT, which serves only as the target for <i>σ</i>. After training, <i>σ</i> is multiplied by one number <i>s</i>, measured once from stereo pairs. At inference a single image goes in.</p>
+    <br>
     <p class="summary-text">Figure 1 makes this visible. Each point groups pixels with similar predicted uncertainty <i>σ</i> and plots their typical actual error. Points on the line are calibrated: their typical error is what <i>σ</i> predicts. MonoProb's grey points all lie above it: its uncertainty is too small, most of all where it is most confident. Ours, in blue, moves onto the line for most groups; its two most confident groups stay above it and its least confident sit slightly below. Under a mean-square criterion, which weights rare large errors more, the gap narrows from 3.6× to 1.2× but does not close.</p>
   </div>
 </div>
