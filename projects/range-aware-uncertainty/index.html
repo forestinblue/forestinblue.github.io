@@ -92,7 +92,7 @@
         <tbody><tr><td class="text-center">×1.93 → ×0.99</td><td class="text-center">×4.62 → ×0.90</td><td class="text-center">×3.30 → ×0.78</td><td class="text-center">×2.45 → ×0.88</td><td class="text-center">×1.32 → ×1.24</td><td class="text-center">×1.78 → ×1.10</td><td class="text-center">×2.91 → ×1.17</td><td class="text-center">×2.64 → ×1.81</td></tr></tbody>
       </table>
     </div>
-    <p class="selected-figure-caption">Typical error ÷ calibrated level, median over 20 groups of pixels binned by predicted <i>σ</i>, before → after (×1 = calibrated); the bold numbers of the panels below. Left four: KITTI validation split. Right four: each dataset's validation logs.</p>
+    <p class="selected-figure-caption">Typical error ÷ calibrated level, before → after; ×1 is calibrated. Left four on KITTI, right four on each dataset.</p>
   </div>
 </div>
 
@@ -101,7 +101,7 @@
 <div class="row justify-content-center">
   <div class="col-12">
     <img src="fig_fixed_models.png" class="img-fluid w-100" alt="Figure 2">
-    <p class="selected-figure-caption mt-2"><strong>Figure 2.</strong> Four networks on the KITTI validation split (163 images). Grey: each network's own <i>σ</i> as trained, without the second-network target (for MonoProb, the released checkpoint); orange: the same recipe times its own label-free constant, mean of 4 runs. Points are 20 groups of pixels with equal counts, binned by predicted <i>σ</i>, at their median <i>σ</i> and median absolute depth error; the line is calibrated (median error = 0.6745 <i>σ</i>). The bold number is the median over the 20 groups of the typical error divided by the calibrated level, before → after. Each network is judged against its own baselines. The MonoViT panel uses the Mono-ViFI target; with a Dynamo-Depth target the recipe fails and is not shown.</p>
+    <p class="selected-figure-caption mt-2"><strong>Figure 2.</strong> The same recipe on three other self-supervised networks (KITTI validation split). Grey: each network's own <i>σ</i> as trained. Orange: the same recipe, then × its own label-free constant <i>s</i>, mean of 4 runs. The bold number is the typical error ÷ what <i>σ</i> promises, median over 20 <i>σ</i>-groups, before → after; 1 is calibrated. After correction all four sit near the line, the three other networks slightly below it (<i>σ</i> now a little too large), MonoViT the most. With a Dynamo-Depth target the recipe fails and is not shown.</p>
   </div>
 </div>
 
@@ -110,7 +110,7 @@
 <div class="row justify-content-center">
   <div class="col-12">
     <img src="fig_fixed_datasets.png" class="img-fluid w-100" alt="Figure 3">
-    <p class="selected-figure-caption mt-2"><strong>Figure 3.</strong> KITTI-trained ours carried to other datasets without retraining, on each dataset's validation logs. Grey: released MonoProb; orange: ours × <i>s</i>, with <i>s</i> re-measured on that dataset's own stereo pairs, mean of 4 runs; no ground-truth depth value is read. nuScenes has no stereo, so the KITTI constant is carried over and <i>σ</i> stays too small. Points and the bold number as in Figure 2. DrivingStereo's ground truth is LiDAR filtered with a stereo model, so it is not fully independent of <i>s</i>; the Argoverse 1 full frame, where the result is mixed, is not shown.</p>
+    <p class="selected-figure-caption mt-2"><strong>Figure 3.</strong> The KITTI-trained model on other datasets, no retraining. On DrivingStereo and Argoverse 1 the constant <i>s</i> is re-measured on that dataset's own stereo pairs. nuScenes has no stereo, so the KITTI constant is carried over and <i>σ</i> stays too small. Numbers as in Figure 2.</p>
     <p class="selected-figure-caption">All panels: validation split, where the configuration was selected; held-out evaluation pending.</p>
   </div>
 </div>
@@ -125,7 +125,6 @@
 
 
             </div>
-          </div>
           <div class="col-xl-1"></div>
         </div>
     </div>
