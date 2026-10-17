@@ -13,6 +13,13 @@
           font-weight: bold;
           color: black;
       }
+      .wide { max-width: 1100px; margin: 1.5rem auto; }
+      .wide img { width: 100%; }
+      .wide figcaption { width: 100%; max-width: none; text-align: left; font-size: 0.9em; margin-top: 0.5rem; }
+      @media (max-width: 576px) {
+        .wide { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .wide img { width: 1000px; max-width: none; }
+      }
     </style>
 
 
@@ -86,34 +93,22 @@
   <div class="col">
     <p class="summary-text"><strong>Does it carry beyond MonoProb?</strong></p>
     <p class="summary-text">A constant read from stereo-matching residuals does this job: on four networks and three driving datasets it lands at the level a LiDAR-fitted constant would give, without reading any ground-truth depth. Carried to a dataset with no stereo, it does not transfer.</p>
-    <div class="table-responsive">
-      <table class="table table-sm table-borderless mb-1" style="font-size:0.9em;">
-        <thead><tr><th scope="col" class="text-center fw-normal">MonoProb</th><th scope="col" class="text-center fw-normal">Monodepth2</th><th scope="col" class="text-center fw-normal">MonoViT</th><th scope="col" class="text-center fw-normal">Lite-Mono</th><th scope="col" class="text-center fw-normal">DrivingStereo, full frame</th><th scope="col" class="text-center fw-normal">DrivingStereo, strip</th><th scope="col" class="text-center fw-normal">Argoverse 1, strip</th><th scope="col" class="text-center fw-normal">nuScenes</th></tr></thead>
-        <tbody><tr><td class="text-center">×1.93 → ×0.99</td><td class="text-center">×4.62 → ×0.90</td><td class="text-center">×3.30 → ×0.78</td><td class="text-center">×2.45 → ×0.88</td><td class="text-center">×1.32 → ×1.24</td><td class="text-center">×1.78 → ×1.10</td><td class="text-center">×2.91 → ×1.17</td><td class="text-center">×2.64 → ×1.81</td></tr></tbody>
-      </table>
-    </div>
-    <p class="selected-figure-caption">Typical error ÷ calibrated level, before → after; ×1 is calibrated. Left four on KITTI, right four on each dataset.</p>
   </div>
 </div>
 
 <br>
 
-<div class="row justify-content-center">
-  <div class="col-12">
-    <img src="fig_fixed_models.png" class="img-fluid w-100" alt="Figure 2">
-    <p class="selected-figure-caption mt-2"><strong>Figure 2.</strong> The same recipe on three other self-supervised networks (KITTI validation split). Grey: each network's own <i>σ</i> as trained. Orange: the same recipe, then × its own label-free constant <i>s</i>, mean of 4 runs. The bold number is the typical error ÷ what <i>σ</i> promises, median over 20 <i>σ</i>-groups, before → after; 1 is calibrated. After correction all four sit near the line, the three other networks slightly below it (<i>σ</i> now a little too large), MonoViT the most. With a Dynamo-Depth target the recipe fails and is not shown.</p>
-  </div>
-</div>
+<figure class="wide">
+  <img src="fig_fixed_models.png" alt="Figure 2">
+  <figcaption class="selected-figure-caption"><strong>Figure 2.</strong> The same recipe on three other self-supervised networks (KITTI validation split). Grey: each network's own <i>σ</i> as trained. Orange: the same recipe, then × its own label-free constant <i>s</i>, mean of 4 runs. The bold number is the typical error ÷ what <i>σ</i> promises, median over 20 <i>σ</i>-groups, before → after; 1 is calibrated. After correction all four sit near the line, the three other networks slightly below it (<i>σ</i> now a little too large), MonoViT the most. With a Dynamo-Depth target the recipe fails and is not shown.</figcaption>
+</figure>
 
 <br>
 
-<div class="row justify-content-center">
-  <div class="col-12">
-    <img src="fig_fixed_datasets.png" class="img-fluid w-100" alt="Figure 3">
-    <p class="selected-figure-caption mt-2"><strong>Figure 3.</strong> The KITTI-trained model on other datasets, no retraining. On DrivingStereo and Argoverse 1 the constant <i>s</i> is re-measured on that dataset's own stereo pairs. nuScenes has no stereo, so the KITTI constant is carried over and <i>σ</i> stays too small. Numbers as in Figure 2.</p>
-    <p class="selected-figure-caption">All panels: validation split, where the configuration was selected; held-out evaluation pending.</p>
-  </div>
-</div>
+<figure class="wide">
+  <img src="fig_fixed_datasets.png" alt="Figure 3">
+  <figcaption class="selected-figure-caption"><strong>Figure 3.</strong> The KITTI-trained model on other datasets, no retraining. On DrivingStereo and Argoverse 1 the constant <i>s</i> is re-measured on that dataset's own stereo pairs. nuScenes has no stereo, so the KITTI constant is carried over and <i>σ</i> stays too small. Numbers as in Figure 2. All panels: validation split, where the configuration was selected; held-out evaluation pending.</figcaption>
+</figure>
 
 <br>
 
