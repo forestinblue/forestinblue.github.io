@@ -104,7 +104,7 @@
   <div class="col-xs col-sm-9">
     <p class="summary-title"><a href="projects/range-aware-uncertainty/">Range-Aware Uncertainty Calibration in Self-Supervised Monocular Depth</a></p>
     <p class="summary-publication-status">MSc thesis, 2026. Paper in preparation with Prof. Rui Huang.</p>
-    <p class="summary-text">Many robotic systems act on the magnitude of learned depth uncertainty, yet the uncertainty of self-supervised depth models is almost always evaluated by ranking, so that magnitude goes unchecked. I show that self-supervised retraining alone cannot close this gap, while a single label-free scale constant estimated from stereo residuals can. This cuts worst-range calibration error by 86% compared with the original model, with no ground-truth depth used in training or calibration.</p>
+    <p class="summary-text">Many robotic systems act on the magnitude of learned depth uncertainty, yet the uncertainty of self-supervised depth models is almost always evaluated by ranking, so that magnitude goes unchecked. I show that the scale of this uncertainty can be re-measured without labels where the model is used: a single constant from stereo-matching residuals reads the ground-truth level within ×1.08 across 27 of 28 networks and dataset readings, and with it worst-range calibration error falls by 86% compared with the original model, with no ground-truth depth used in training or calibration.</p>
     <a href="projects/range-aware-uncertainty/" class="btn-sm badge-button" role="button">project page</a>
 
   </div>

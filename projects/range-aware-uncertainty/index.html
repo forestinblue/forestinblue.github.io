@@ -61,9 +61,11 @@
 
 <div class="row">
   <div class="col">
-    <p class="summary-text"><strong>Without ground-truth depth in training or calibration, we cut the worst-range calibration error of a self-supervised monocular depth model's uncertainty by 86%.</strong></p>
+    <p class="summary-text"><strong>The scale of a learned depth uncertainty can be re-measured without labels where the model is used: one constant from stereo-matching residuals reads the ground-truth level of <i>σ</i> to within ×1.08 in 27 of 28 readings across networks and datasets, and with it a self-supervised model's worst-range miscalibration drops by 86%.</strong></p>
     <br>
-    <p class="summary-text"><strong>Problem.</strong> Many robotic systems act on the magnitude of learned depth uncertainty, yet the uncertainty of self-supervised depth models is almost always evaluated by ranking, so that magnitude goes unchecked. On KITTI, MonoProb underestimates its error in all five depth ranges, with typical error up to 3.7× larger than its uncertainty implies. Retraining on self-supervised signals alone never beat a single ground-truth-fitted global scale in any of 42 runs.</p>
+    <p class="summary-text"><strong>Problem.</strong> Systems that consume a depth uncertainty <i>σ</i> read it as a number, and those that state how they set its scale fit a constant with labels. Self-supervised depth is built for places without labels, yet its <i>σ</i> is scored almost only by ranking, which cannot see the scale. On KITTI, released MonoProb under-reports its error in all five depth ranges; in the nearest range the typical error is 3.7× what <i>σ</i> implies. Retraining on self-supervised signals alone never beat a single ground-truth-fitted global scale (0 of 44 runs).</p>
+    <br>
+    <p class="summary-text"><strong>Finding.</strong> The right constant differs by network and by dataset: by one label-free rule it ranges from ×1.81 to ×2.46 across four KITTI-trained networks, and the KITTI constant carried to nuScenes leaves all five ranges under-reported. Measured by that rule on the same images, a constant from stereo-matching residuals lies within ×1.08 of the ground-truth level in 27 of 28 <i>σ</i> readings on KITTI, Argoverse 1 and DrivingStereo (the exception is Metric3D v2 in its native metric frame), needs no more images than a LiDAR-fitted constant, and on the published <i>σ</i> of two other systems reads their own ground-truth level within 0.11 nats on full-resolution KITTI input.</p>
     <br>
     <p class="summary-text">Figure 1 makes this visible. Each point groups pixels with similar predicted uncertainty <i>σ</i> and plots their typical actual error. Points on the line are calibrated: their typical error is what <i>σ</i> predicts. MonoProb's grey points all lie above it: its uncertainty is too small, most of all where it is most confident. Ours, in blue, moves onto the line for most groups; its two most confident groups stay above it and its least confident sit slightly below. Under a mean-square criterion, which weights rare large errors more, the gap narrows from 3.6× to 1.2× but does not close.</p>
   </div>
@@ -83,6 +85,8 @@
 <div class="row">
   <div class="col">
     <p class="summary-publication-status">Manuscript in preparation. Preliminary results on our validation split; held-out evaluation pending. Preprint expected November 2026. A one-page summary is available on request: <a href="mailto:ijunsuk9797@gmail.com">ijunsuk9797@gmail.com</a></p>
+    <br>
+    <p class="summary-text"><strong>Limits.</strong> Label-free, not sensor-free: stereo pairs are needed once per deployment domain, and the constant is measured on the pixel population on which <i>σ</i> is evaluated (on KITTI the benchmark crop; elsewhere the positions of LiDAR returns, no value read); without stereo, as on nuScenes, it cannot be re-measured. One constant fixes the level, not the shape: with a Dynamo-Depth target, and for the recipe retrained from scratch on DrivingStereo, <i>σ</i> loses to the ground-truth-fitted scale, and on the full Argoverse 1 and DrivingStereo frames it loses in 2 of 4 runs each.</p>
   </div>
 </div>
 
