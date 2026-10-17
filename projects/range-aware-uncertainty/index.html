@@ -84,6 +84,41 @@
 
 <div class="row">
   <div class="col">
+    <p class="summary-text"><strong>Does it carry beyond MonoProb?</strong></p>
+    <p class="summary-text">A constant read from stereo-matching residuals does this job: on four networks and three driving datasets it lands at the level a LiDAR-fitted constant would give, without reading any ground-truth depth. Carried to a dataset with no stereo, it does not transfer.</p>
+    <div class="table-responsive">
+      <table class="table table-sm table-borderless mb-1" style="font-size:0.9em;">
+        <thead><tr><th scope="col" class="text-center fw-normal">MonoProb</th><th scope="col" class="text-center fw-normal">Monodepth2</th><th scope="col" class="text-center fw-normal">MonoViT</th><th scope="col" class="text-center fw-normal">Lite-Mono</th><th scope="col" class="text-center fw-normal">DrivingStereo, full frame</th><th scope="col" class="text-center fw-normal">DrivingStereo, strip</th><th scope="col" class="text-center fw-normal">Argoverse 1, strip</th><th scope="col" class="text-center fw-normal">nuScenes</th></tr></thead>
+        <tbody><tr><td class="text-center">×1.93 → ×0.99</td><td class="text-center">×4.62 → ×0.90</td><td class="text-center">×3.30 → ×0.78</td><td class="text-center">×2.45 → ×0.88</td><td class="text-center">×1.32 → ×1.24</td><td class="text-center">×1.78 → ×1.10</td><td class="text-center">×2.91 → ×1.17</td><td class="text-center">×2.64 → ×1.81</td></tr></tbody>
+      </table>
+    </div>
+    <p class="selected-figure-caption">Typical error ÷ calibrated level, median over 20 groups of pixels binned by predicted <i>σ</i>, before → after (×1 = calibrated); the bold numbers of the panels below. Left four: KITTI validation split. Right four: each dataset's validation logs.</p>
+  </div>
+</div>
+
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-12">
+    <img src="fig_fixed_models.png" class="img-fluid w-100" alt="Figure 2">
+    <p class="selected-figure-caption mt-2"><strong>Figure 2.</strong> Four networks on the KITTI validation split (163 images). Grey: each network's own <i>σ</i> as trained, without the second-network target (for MonoProb, the released checkpoint); orange: the same recipe times its own label-free constant, mean of 4 runs. Points are 20 groups of pixels with equal counts, binned by predicted <i>σ</i>, at their median <i>σ</i> and median absolute depth error; the line is calibrated (median error = 0.6745 <i>σ</i>). The bold number is the median over the 20 groups of the typical error divided by the calibrated level, before → after. Each network is judged against its own baselines. The MonoViT panel uses the Mono-ViFI target; with a Dynamo-Depth target the recipe fails and is not shown.</p>
+  </div>
+</div>
+
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-12">
+    <img src="fig_fixed_datasets.png" class="img-fluid w-100" alt="Figure 3">
+    <p class="selected-figure-caption mt-2"><strong>Figure 3.</strong> KITTI-trained ours carried to other datasets without retraining, on each dataset's validation logs. Grey: released MonoProb; orange: ours × <i>s</i>, with <i>s</i> re-measured on that dataset's own stereo pairs, mean of 4 runs; no ground-truth depth value is read. nuScenes has no stereo, so the KITTI constant is carried over and <i>σ</i> stays too small. Points and the bold number as in Figure 2. DrivingStereo's ground truth is LiDAR filtered with a stereo model, so it is not fully independent of <i>s</i>; the Argoverse 1 full frame, where the result is mixed, is not shown.</p>
+    <p class="selected-figure-caption">All panels: validation split, where the configuration was selected; held-out evaluation pending.</p>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col">
     <p class="summary-publication-status">Manuscript in preparation. Preliminary results on our validation split; held-out evaluation pending. Preprint expected November 2026. A one-page summary is available on request: <a href="mailto:ijunsuk9797@gmail.com">ijunsuk9797@gmail.com</a></p>
   </div>
 </div>
