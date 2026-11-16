@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Jun Seok Kim">
+    <meta name="description" content="MonoCal corrects the scale and the shape of the uncertainty of self-supervised monocular depth without ground-truth depth.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Calibrating the Uncertainty of Self-Supervised Monocular Depth without Labels">
+    <meta property="og:description" content="MonoCal corrects the scale and the shape of the uncertainty of self-supervised monocular depth without ground-truth depth.">
+    <meta property="og:url" content="https://forestinblue.github.io/projects/monocal/">
+    <meta property="og:image" content="https://forestinblue.github.io/projects/monocal/fig1_teaser.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>Calibrating the Uncertainty of Self-Supervised Monocular Depth without Labels</title>
+    <style>
+      strong {
+          font-weight: bold;
+          color: black;
+      }
+      .wide { max-width: 1100px; margin: 1.5rem auto; }
+      .wide img { width: 100%; }
+      .wide figcaption { width: 100%; max-width: none; text-align: left; font-size: 0.9em; margin-top: 0.5rem; }
+      .section-title { font-family: 'Alegreya', serif; font-size: 1.6em; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+      .paper-links { text-align: center; margin-top: 0.8rem; }
+      .author-note { text-align: center; font-size: 0.9em; margin-top: 4px; margin-bottom: 0; }
+      .tldr { margin-top: 1.2rem; margin-bottom: 0; }
+      .table-fig { max-width: 900px; }
+      .ba-wrap { max-width: 760px; margin: 1.5rem auto; }
+      .ba-labels { display: flex; justify-content: space-between; font-size: 0.9em; margin-bottom: 4px; }
+      .ba { position: relative; --pos: 50%; line-height: 0; }
+      .ba img { display: block; width: 100%; height: auto; }
+      .ba img + img { margin-top: 4px; }
+      .ba-top { position: absolute; top: 0; left: 0; right: 0; bottom: 0; -webkit-clip-path: inset(0 calc(100% - var(--pos)) 0 0); clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+      .ba-handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: #222; pointer-events: none; }
+      .ba-handle::after { content: "\2194"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 2px solid #222; color: #222; font: 16px/26px sans-serif; text-align: center; }
+      .ba-range { position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+      .ba:focus-within { outline: 2px solid #1a6b72; outline-offset: 2px; }
+      .ba-caption { font-size: 0.9em; margin-top: 0.5rem; line-height: 1.5; }
+      @media (max-width: 576px) {
+        .wide { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .wide img { width: 1000px; max-width: none; }
+      }
+    </style>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500&family=Alegreya+SC&family=Lora:wght@400&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+        <div class="row">
+          <div class="col-xl-1"></div>
+          <div class="col col-xl-10">
+            <div class="row mb-3">
+  <div class="col d-none d-md-block">
+    <div class="d-flex justify-content-start flex-wrap">
+    <a href="../../index.html" class="btn link-button" role="button">&larr; Home</a>
+    </div>
+  </div>
+  <div class="col d-md-none">
+    <div class="d-flex justify-content-start flex-wrap">
+    <a href="../../index.html" class="btn link-button-small" role="button">&larr; Home</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <p class="full-title">Calibrating the Uncertainty of Self-Supervised Monocular Depth without Labels</p>
+    <p class="authors-list"><a href="https://forestinblue.github.io">Jun Seok Kim</a>, <a href="https://myweb.cuhk.edu.cn/ruihuang">Rui Huang</a><sup>*</sup></p>
+    <p class="schools-list">The Chinese University of Hong Kong, Shenzhen</p>
+    <p class="author-note"><sup>*</sup>Corresponding author</p>
+    <p class="publication-status">Preprint, 2026. Under review.</p>
+    <div class="paper-links">
+      <!-- ARXIV: enable when the arXiv identifier is announced, and replace ARXIV_ID in both links.
+      <a href="https://arxiv.org/pdf/ARXIV_ID" class="btn btn-sm big-badge-button" role="button">Paper</a>
+      <a href="https://arxiv.org/abs/ARXIV_ID" class="btn btn-sm big-badge-button" role="button">arXiv</a>
+      -->
+      <span class="btn btn-sm big-badge-button disabled" role="button" aria-disabled="true">Code (coming soon)</span>
+    </div>
+  </div>
+</div>
+
+<figure class="wide">
+  <img src="fig1_teaser.png" alt="Reliability diagrams of predicted uncertainty against absolute depth error, before and after MonoCal">
+  <figcaption class="selected-figure-caption"><strong>The uncertainty of self-supervised depth is miscalibrated in scale and shape, and MonoCal corrects both without labels.</strong> <strong>(a)</strong> MonoProb. The scale is the error divided by the uncertainty over all pixels, and the shape is whether the curve follows the line. <strong>(b)</strong> The scale before and after scale calibration on four other networks on KITTI, one of them from Poggi et al. <strong>(c)</strong> On two other datasets.</figcaption>
+</figure>
+
+<div class="row">
+  <div class="col">
+    <p class="summary-text tldr"><strong>TL;DR:</strong> MonoCal corrects both the scale and the shape of the uncertainty of self-supervised monocular depth without ground-truth depth.</p>
+    <p class="section-title">Abstract</p>
+    <p class="summary-text">Self-supervised monocular depth networks can predict a per-pixel uncertainty, which is mainly evaluated by how well it ranks pixels according to their error. Such metrics are insensitive to the magnitude of the uncertainty, so an uncertainty half as large as the actual error obtains the same score. In this paper, we investigate whether the predicted uncertainty is as large as the depth error, both on average (<i>scale</i>) and across confident and uncertain, near and far pixels (<i>shape</i>). On KITTI, the scale is miscalibrated for every uncertainty estimate we evaluate, and the error of MonoProb is nearly twice its predicted uncertainty. We propose MonoCal, which corrects both the scale and the shape without ground-truth depth. <i>Scale calibration</i> multiplies the uncertainty by a single constant measured from stereo pairs, requiring no retraining, and this constant closely matches the one fitted with ground truth. Since a constant cannot change the shape, we further retrain the uncertainty to predict where the depth of the network disagrees with that of a second self-supervised network. Experiments on KITTI show that MonoCal achieves better calibration across uncertainty levels and depth ranges than rescaling with ground truth, while still using a single image at inference. Code will be made publicly available.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <p class="section-title">Method</p>
+  </div>
+</div>
+
+<figure class="wide">
+  <img src="fig2_method.png" alt="Overview of MonoCal: scale calibration and the disagreement target">
+  <figcaption class="selected-figure-caption"><strong>Overview of MonoCal.</strong> <i>Scale calibration</i> (blue) measures one constant <i>s</i> from the residual between the network's depth μ and a stereo depth, and multiplies the uncertainty σ by it. The <i>disagreement target</i> (orange) trains σ on where μ disagrees with the depth of a second self-supervised network. MonoCal applies the target, then the calibration. Inference uses one image.</figcaption>
+</figure>
+
+<div class="row">
+  <div class="col">
+    <p class="section-title">Quantitative Results</p>
+    <p class="summary-text">Scale calibration reduces the <i>r</i><sub>med</sub> of MonoProb from 1.94 to 0.96 without labels or retraining, compared to 0.90 for the ground-truth constant.</p>
+  </div>
+</div>
+
+<figure class="wide table-fig">
+  <img src="table2_main_results.png" alt="Main results on KITTI with the MonoProb backbone: scale, shape and standard metrics for MonoProb, the ground-truth constant, scale calibration and MonoCal">
+  <figcaption class="selected-figure-caption"><strong>Main results on KITTI with the MonoProb backbone.</strong> MonoCal (full) is the disagreement target followed by scale calibration. A constant changes neither the depth nor the ranking of pixels, so the first three rows share SI-ENCE, AUSE and abs_rel. Bold: best label-free result. †: lowest for a σ that is too small, so no value is bold.</figcaption>
+</figure>
+
+<div class="row">
+  <div class="col">
+    <p class="section-title">Qualitative Results</p>
+  </div>
+</div>
+
+<figure class="wide">
+  <img src="fig5_qualitative.png" alt="Error, predicted uncertainty and their ratio on three KITTI test images">
+  <figcaption class="selected-figure-caption"><strong>Qualitative results.</strong> With MonoCal, the ratio of error to uncertainty is closest to 1 (white). Top: on one color scale, a calibrated uncertainty is as bright as its error. Bottom: red where the uncertainty is too small, blue where it is too large. Three test images.</figcaption>
+</figure>
+
+<div class="ba-wrap">
+  <div class="ba-labels"><span>&larr; MonoProb</span><span>MonoCal (ours) &rarr;</span></div>
+  <div class="ba" id="ba">
+    <div>
+      <img src="ratio_a_monocal.png" alt="Error divided by uncertainty with MonoCal, test image (a)">
+      <img src="ratio_b_monocal.png" alt="Error divided by uncertainty with MonoCal, test image (b)">
+      <img src="ratio_c_monocal.png" alt="Error divided by uncertainty with MonoCal, test image (c)">
+    </div>
+    <div class="ba-top">
+      <img src="ratio_a_monoprob.png" alt="Error divided by uncertainty with MonoProb, test image (a)">
+      <img src="ratio_b_monoprob.png" alt="Error divided by uncertainty with MonoProb, test image (b)">
+      <img src="ratio_c_monoprob.png" alt="Error divided by uncertainty with MonoProb, test image (c)">
+    </div>
+    <div class="ba-handle"></div>
+    <input class="ba-range" type="range" min="0" max="100" value="50" step="0.5" aria-label="Compare MonoProb with MonoCal">
+  </div>
+  <p class="ba-caption"><strong>Drag to compare.</strong> Absolute depth error divided by predicted uncertainty on the three test images above. White where the ratio is 1, red where the uncertainty is too small, blue where it is too large.</p>
+</div>
+
+<!-- BIBTEX: enable together with the arXiv links, and replace ARXIV_ID.
+<a name="bibtex"></a>
+<div class="row">
+  <div class="col">
+    <p class="section-title">BibTeX</p>
+    <pre class="bibtex-code">@article{kim2026monocal,
+  title   = {Calibrating the Uncertainty of Self-Supervised Monocular Depth without Labels},
+  author  = {Kim, Jun Seok and Huang, Rui},
+  journal = {arXiv preprint arXiv:ARXIV_ID},
+  year    = {2026}
+}</pre>
+  </div>
+</div>
+-->
+
+            </div>
+          <div class="col-xl-1"></div>
+        </div>
+    </div>
+
+    <footer>
+      <div class="row">
+        <div class="col-12">
+          <br>
+          <br>
+          <br>
+          <br>
+        </div>
+      </div>
+      <p class="footer-text">Website adapted from <a href="https://nmwsharp.com">Nicholas Sharp</a></p>
+    </footer>
+
+    <script>
+      (function () {
+        var ba = document.getElementById('ba');
+        if (!ba) return;
+        var range = ba.querySelector('.ba-range');
+        range.addEventListener('input', function () {
+          ba.style.setProperty('--pos', range.value + '%');
+        });
+      })();
+    </script>
+
+  </body>
+
+</html>
